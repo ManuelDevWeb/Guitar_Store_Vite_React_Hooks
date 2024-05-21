@@ -10,6 +10,25 @@ import { Guitar } from "./components/Guitar";
 function App() {
   // States
   const [data, setData] = useState([]);
+  const [cart, setCart] = useState([]);
+
+  const addToCart=(item)=>{
+    const itemExist=cart.find((guitar)=>guitar.id===item.id);
+    
+    if(itemExist){
+      const newCart=cart.map((item)=>{
+        if(item.id===itemExist.id){
+          item.quantity++;
+        }
+        return item;
+      })
+      setCart(newCart);
+    }else{
+      item.quantity=1;
+      setCart([...cart, item])
+    }
+
+  }
 
   useEffect(() => {
     setData(db);
@@ -23,7 +42,13 @@ function App() {
         <h2 className="text-center">Nuestra Colección</h2>
 
         <div className="row mt-5">
-          {data.map(guitar => <Guitar key={guitar.id} name={guitar.name} description={guitar.description} image={guitar.image} price={guitar.price} />)}
+          {data.map((guitar) => (
+            <Guitar
+              key={guitar.id}
+              guitar={guitar}
+              addToCart={addToCart}              
+            />
+          ))}
         </div>
       </main>
 
