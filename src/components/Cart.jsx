@@ -13,7 +13,7 @@ const Cart = ({ cart, removeFromCart, increaseQuantity, decreaseQuantity, clearC
     <div className="carrito">
       <img
         className="img-fluid"
-        src="./public/img/carrito.png"
+        src="/img/carrito.png"
         alt="imagen carrito"
       />
 
